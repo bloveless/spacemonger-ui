@@ -1,4 +1,4 @@
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import {
   Box,
   Button,
@@ -12,21 +12,16 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-const Sales = (props) => {
+const NetWorth = (props) => {
   const theme = useTheme();
 
   const data = {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20],
+        data: [18000, 5000, 19000, 27000, 29000, 19000, 20000],
         label: 'This year'
       },
-      {
-        backgroundColor: colors.grey[200],
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year'
-      }
     ],
     labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug']
   };
@@ -98,7 +93,7 @@ const Sales = (props) => {
             Last 7 days
           </Button>
         )}
-        title="Latest Sales"
+        title="Net Worth"
       />
       <Divider />
       <CardContent>
@@ -108,7 +103,7 @@ const Sales = (props) => {
             position: 'relative'
           }}
         >
-          <Bar
+          <Line
             data={data}
             options={options}
           />
@@ -135,4 +130,4 @@ const Sales = (props) => {
   );
 };
 
-export default Sales;
+export default NetWorth;
