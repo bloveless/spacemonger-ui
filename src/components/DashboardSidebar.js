@@ -10,44 +10,46 @@ import {
   Typography
 } from '@material-ui/core';
 import {
-  BarChart as BarChartIcon,
-  Lock as LockIcon,
   ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
 } from 'react-feather';
 import NavItem from './NavItem';
 
 const items = [
-  {
-    href: '/app/user',
-    icon: UserIcon,
-    title: 'User'
-  },
-  {
-    href: '/app/ships',
-    icon: BarChartIcon,
-    title: 'Ships'
-  },
+  // {
+  //   href: '/app/dashboard',
+  //   icon: UserIcon,
+  //   title: 'User'
+  // },
+  // {
+  //   href: '/app/ships',
+  //   icon: BarChartIcon,
+  //   title: 'Ships'
+  // },
   {
     href: '/app/systems',
     icon: ShoppingBagIcon,
-    title: 'Systems'
+    title: 'Systems',
   },
   {
-    href: '/app/automation',
-    icon: UserIcon,
-    title: 'Automation'
-  },
-  {
-    href: '/app/market-data',
+    href: '/app/route-research',
     icon: ShoppingBagIcon,
-    title: 'Market Data',
+    title: 'Route Research',
   },
-  {
-    href: '/login',
-    icon: LockIcon,
-    title: 'Login'
-  },
+  // {
+  //   href: '/app/automation',
+  //   icon: UserIcon,
+  //   title: 'Automation'
+  // },
+  // {
+  //   href: '/app/market-data',
+  //   icon: ShoppingBagIcon,
+  //   title: 'Market Data',
+  // },
+  // {
+  //   href: '/login',
+  //   icon: LockIcon,
+  //   title: 'Login'
+  // },
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {

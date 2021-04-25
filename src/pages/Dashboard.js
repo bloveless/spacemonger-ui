@@ -10,7 +10,7 @@ import NetWorth from '../components/dashboard/NetWorth';
 const Dashboard = () => (
   <>
     <Helmet>
-      <title>Dashboard | Material Kit</title>
+      <title>Dashboard | SpaceMonger</title>
     </Helmet>
     <Box
       sx={{

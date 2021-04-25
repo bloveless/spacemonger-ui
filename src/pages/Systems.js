@@ -5,11 +5,11 @@ import {
   Grid,
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import SystemLocationCard from '../components/systems/SystemLocationCard';
 import Loading from '../components/Loading';
 import SystemMap from '../components/systems/SystemMap';
 import SystemsListToolbar from '../components/systems/SystemsListToolbar';
+import client from '../utils/client';
 
 const Systems = () => {
   const [loadingSystemLocations, setLoadingSystemLocations] = useState(true);
@@ -19,8 +19,7 @@ const Systems = () => {
   const [selectedSystemLocations, setSelectedSystemLocations] = useState([]);
 
   useEffect(() => {
-    console.log('loading systems');
-    axios.get('http://localhost:8080/systems')
+    client.get('/systems')
       .then((response) => {
         const newSelectedSystem = response.data[0].system_symbol;
 
@@ -46,7 +45,7 @@ const Systems = () => {
   return (
     <>
       <Helmet>
-        <title>Systems | SpaceTraders</title>
+        <title>Systems | SpaceMonger</title>
       </Helmet>
       <Box
         sx={{

@@ -6,13 +6,17 @@ import {
 } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-const SystemsListToolbar = ({
-  selectedSystem, systems, onChange, ...rest
+const RouteResearchToolbar = ({
+  selectedSystem,
+  systems,
+  handleSystemChange,
+  estimatedQuantity,
+  handleEstimatedQuantityChange
 }) => {
   const systemsLabels = systems.map((system) => ({ value: system, label: system }));
 
   return (
-    <Box {...rest}>
+    <Box>
       <Box sx={{ mt: 3 }}>
         <Card>
           <CardContent>
@@ -22,7 +26,7 @@ const SystemsListToolbar = ({
                   fullWidth
                   label="Select System"
                   name="system"
-                  onChange={(e) => onChange(e.target.value)}
+                  onChange={(e) => handleSystemChange(e.currentTarget.value)}
                   required
                   select
                   SelectProps={{ native: true }}
@@ -39,6 +43,16 @@ const SystemsListToolbar = ({
                   ))}
                 </TextField>
               </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  label="Estimated Quantity"
+                  name="estimated_quantity"
+                  onChange={(e) => handleEstimatedQuantityChange(e.currentTarget.value)}
+                  value={estimatedQuantity}
+                  variant="outlined"
+                />
+              </Grid>
             </Grid>
           </CardContent>
         </Card>
@@ -47,10 +61,12 @@ const SystemsListToolbar = ({
   );
 };
 
-SystemsListToolbar.propTypes = {
+RouteResearchToolbar.propTypes = {
   selectedSystem: PropTypes.string.isRequired,
   systems: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onChange: PropTypes.func.isRequired,
+  handleSystemChange: PropTypes.func.isRequired,
+  estimatedQuantity: PropTypes.string,
+  handleEstimatedQuantityChange: PropTypes.func.isRequired
 };
 
-export default SystemsListToolbar;
+export default RouteResearchToolbar;

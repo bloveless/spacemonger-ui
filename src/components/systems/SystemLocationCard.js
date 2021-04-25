@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import {
-  Box,
+  Box, Button,
   Card,
   CardContent,
   Divider,
   Grid,
   Typography
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const SystemLocationCard = ({ systemLocation, ...rest }) => (
   <Card
@@ -41,6 +40,13 @@ const SystemLocationCard = ({ systemLocation, ...rest }) => (
       >
         {`(X: ${systemLocation.x}, Y: ${systemLocation.y})`}
       </Typography>
+      <Typography
+        align="center"
+        color="textPrimary"
+        variant="body2"
+      >
+        {`${systemLocation.system_name} (${systemLocation.system_symbol})`}
+      </Typography>
     </CardContent>
     <Box sx={{ flexGrow: 1 }} />
     <Divider />
@@ -56,16 +62,21 @@ const SystemLocationCard = ({ systemLocation, ...rest }) => (
             alignItems: 'center',
             display: 'flex'
           }}
+        />
+        <Grid
+          item
+          sx={{
+            alignItems: 'center',
+            display: 'flex'
+          }}
         >
-          <AccessTimeIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
+          <Button
+            color="primary"
+            variant="contained"
+            href={`/app/market-data/${systemLocation.location_symbol}`}
           >
-            {`${systemLocation.system_name} (${systemLocation.system_symbol})`}
-          </Typography>
+            View Market Data
+          </Button>
         </Grid>
       </Grid>
     </Box>
