@@ -128,6 +128,9 @@ const RouteResearch = () => {
                                 Sell Location
                               </TableCell>
                               <TableCell>
+                                Good
+                              </TableCell>
+                              <TableCell>
                                 Distance
                               </TableCell>
                               <TableCell>
@@ -169,6 +172,9 @@ const RouteResearch = () => {
                                   >
                                     {systemHighestProfit.sell_location_symbol}
                                   </Link>
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.good_symbol}
                                 </TableCell>
                                 <TableCell>
                                   {systemHighestProfit.distance}
