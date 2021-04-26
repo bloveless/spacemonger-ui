@@ -26,7 +26,7 @@ const RouteResearch = () => {
   const [systemGoods, setSystemGoods] = useState([]);
   const [estimatedQuantity, setEstimatedQuantity] = useState('');
   const [bestRoutes, setBestRoutes] = useState({});
-  const [systemHighestProfit, setSystemHighestProfit] = useState({ good_symbol: null, profit: 0 });
+  const [systemHighestProfits, setSystemHighestProfits] = useState([]);
 
   useEffect(() => {
     client.get('/systems')
@@ -55,14 +55,23 @@ const RouteResearch = () => {
   }, [selectedSystem]);
 
   useEffect(() => {
-    let bestRoute = { profit: 0 };
-    Object.keys(bestRoutes).forEach((routeKey) => {
-      if (bestRoutes[routeKey].profit > bestRoute.profit) {
-        bestRoute = bestRoutes[routeKey];
+    let currentHighestProfit = Number.MIN_SAFE_INTEGER;
+    let currentHighestProfitIndex = -1;
+    const highestProfits = [];
+    Object.keys(bestRoutes).forEach((routeKey, index) => {
+      if (bestRoutes[routeKey].profit > currentHighestProfit) {
+        currentHighestProfit = bestRoutes[routeKey].profit;
+        currentHighestProfitIndex = index;
       }
+
+      highestProfits.push({ ...bestRoutes[routeKey], isHighestProfit: false });
     });
 
-    setSystemHighestProfit(bestRoute);
+    if (highestProfits[currentHighestProfitIndex] != null) {
+      highestProfits[currentHighestProfitIndex].isHighestProfit = true;
+    }
+
+    setSystemHighestProfits(highestProfits.filter((highestProfit) => highestProfit.purchase_location_symbol != null));
   }, [bestRoutes]);
 
   const handleUpdateBestRoute = (bestRoute) => {
@@ -102,12 +111,10 @@ const RouteResearch = () => {
               container
               spacing={3}
             >
-              {systemHighestProfit.good_symbol != null && (
+              {systemHighestProfits.length !== 0 && (
                 <Grid item xs={12}>
                   <Card>
-                    <CardHeader
-                      title={`This systems highest profit is: ${systemHighestProfit.good_symbol}`}
-                    />
+                    <CardHeader title="This systems highest profits" />
                     <Divider />
                     <PerfectScrollbar>
                       <Box sx={{ minWidth: 800 }}>
@@ -144,43 +151,48 @@ const RouteResearch = () => {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            <TableRow hover style={{ backgroundColor: 'rgb(173, 222, 184)' }}>
-                              <TableCell>
-                                <Link
-                                  href={`/app/route-research/${systemHighestProfit.purchase_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
-                                >
-                                  {systemHighestProfit.purchase_location_symbol}
-                                </Link>
-                              </TableCell>
-                              <TableCell>
-                                <Link
-                                  href={`/app/route-research/${systemHighestProfit.sell_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
-                                >
-                                  {systemHighestProfit.sell_location_symbol}
-                                </Link>
-                              </TableCell>
-                              <TableCell>
-                                {systemHighestProfit.distance}
-                              </TableCell>
-                              <TableCell>
-                                {systemHighestProfit.approximate_fuel}
-                              </TableCell>
-                              <TableCell>
-                                {systemHighestProfit.purchase_quantity_available}
-                              </TableCell>
-                              <TableCell>
-                                {systemHighestProfit.sell_quantity_available}
-                              </TableCell>
-                              <TableCell>
-                                {systemHighestProfit.purchase_price_per_unit}
-                              </TableCell>
-                              <TableCell>
-                                {systemHighestProfit.sell_price_per_unit}
-                              </TableCell>
-                              <TableCell>
-                                {estimatedQuantity !== '' ? systemHighestProfit.profit : '?'}
-                              </TableCell>
-                            </TableRow>
+                            {systemHighestProfits.map((systemHighestProfit) => (
+                              <TableRow
+                                hover
+                                style={{ backgroundColor: systemHighestProfit.isHighestProfit ? 'rgb(173, 222, 184)' : 'inherit' }}
+                              >
+                                <TableCell>
+                                  <Link
+                                    href={`/app/route-research/${systemHighestProfit.purchase_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
+                                  >
+                                    {systemHighestProfit.purchase_location_symbol}
+                                  </Link>
+                                </TableCell>
+                                <TableCell>
+                                  <Link
+                                    href={`/app/route-research/${systemHighestProfit.sell_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
+                                  >
+                                    {systemHighestProfit.sell_location_symbol}
+                                  </Link>
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.distance}
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.approximate_fuel}
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.purchase_quantity_available}
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.sell_quantity_available}
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.purchase_price_per_unit}
+                                </TableCell>
+                                <TableCell>
+                                  {systemHighestProfit.sell_price_per_unit}
+                                </TableCell>
+                                <TableCell>
+                                  {estimatedQuantity !== '' ? systemHighestProfit.profit : '?'}
+                                </TableCell>
+                              </TableRow>
+                            ))}
                           </TableBody>
                         </Table>
                       </Box>
