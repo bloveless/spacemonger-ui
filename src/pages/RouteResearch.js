@@ -115,7 +115,7 @@ const RouteResearch = () => {
                           <TableHead>
                             <TableRow>
                               <TableCell>
-                                Buy Location
+                                Purchase Location
                               </TableCell>
                               <TableCell>
                                 Sell Location
@@ -127,13 +127,13 @@ const RouteResearch = () => {
                                 Approximate Fuel
                               </TableCell>
                               <TableCell>
-                                Buy Quantity Available
+                                Purchase Quantity Available
                               </TableCell>
                               <TableCell>
                                 Sell Quantity Available
                               </TableCell>
                               <TableCell>
-                                Buy Price Per Unit
+                                Purchase Price Per Unit
                               </TableCell>
                               <TableCell>
                                 Sell Price Per Unit
@@ -147,9 +147,9 @@ const RouteResearch = () => {
                             <TableRow hover style={{ backgroundColor: 'rgb(173, 222, 184)' }}>
                               <TableCell>
                                 <Link
-                                  href={`/app/route-research/${systemHighestProfit.buy_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
+                                  href={`/app/route-research/${systemHighestProfit.purchase_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
                                 >
-                                  {systemHighestProfit.buy_location_symbol}
+                                  {systemHighestProfit.purchase_location_symbol}
                                 </Link>
                               </TableCell>
                               <TableCell>
@@ -166,13 +166,13 @@ const RouteResearch = () => {
                                 {systemHighestProfit.approximate_fuel}
                               </TableCell>
                               <TableCell>
-                                {systemHighestProfit.buy_quantity_available}
+                                {systemHighestProfit.purchase_quantity_available}
                               </TableCell>
                               <TableCell>
                                 {systemHighestProfit.sell_quantity_available}
                               </TableCell>
                               <TableCell>
-                                {systemHighestProfit.buy_price_per_unit}
+                                {systemHighestProfit.purchase_price_per_unit}
                               </TableCell>
                               <TableCell>
                                 {systemHighestProfit.sell_price_per_unit}

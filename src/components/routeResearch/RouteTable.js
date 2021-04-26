@@ -49,7 +49,7 @@ const RouteTable = (props) => {
   useEffect(() => {
     const newRoutes = goodRoutesRaw.map((goodRoute) => ({
       ...goodRoute,
-      profit: calculateProfit(goodRoute.buy_price_per_unit, goodRoute.sell_price_per_unit, goodRoute.approximate_fuel),
+      profit: calculateProfit(goodRoute.purchase_price_per_unit, goodRoute.sell_price_per_unit, goodRoute.approximate_fuel),
       isHighestProfit: false,
       isLowestProfit: false
     }));
@@ -115,7 +115,7 @@ const RouteTable = (props) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>
-                      Buy Location
+                      Purchase Location
                     </TableCell>
                     <TableCell>
                       Sell Location
@@ -127,13 +127,13 @@ const RouteTable = (props) => {
                       Approximate Fuel
                     </TableCell>
                     <TableCell>
-                      Buy Quantity Available
+                      Purchase Quantity Available
                     </TableCell>
                     <TableCell>
                       Sell Quantity Available
                     </TableCell>
                     <TableCell>
-                      Buy Price Per Unit
+                      Purchase Price Per Unit
                     </TableCell>
                     <TableCell>
                       Sell Price Per Unit
@@ -156,14 +156,14 @@ const RouteTable = (props) => {
                     return (
                       <TableRow
                         hover
-                        key={`${goodRoute.buy_location_symbol}-${goodRoute.sell_location_symbol}-${goodRoute.good_symbol}`}
+                        key={`${goodRoute.purchase_location_symbol}-${goodRoute.sell_location_symbol}-${goodRoute.good_symbol}`}
                         style={{ backgroundColor }}
                       >
                         <TableCell>
                           <Link
-                            href={`/app/route-research/${goodRoute.buy_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
+                            href={`/app/route-research/${goodRoute.purchase_location_symbol}?estimatedQuantity=${estimatedQuantity}`}
                           >
-                            {goodRoute.buy_location_symbol}
+                            {goodRoute.purchase_location_symbol}
                           </Link>
                         </TableCell>
                         <TableCell>
@@ -180,13 +180,13 @@ const RouteTable = (props) => {
                           {goodRoute.approximate_fuel}
                         </TableCell>
                         <TableCell>
-                          {goodRoute.buy_quantity_available}
+                          {goodRoute.purchase_quantity_available}
                         </TableCell>
                         <TableCell>
                           {goodRoute.sell_quantity_available}
                         </TableCell>
                         <TableCell>
-                          {goodRoute.buy_price_per_unit}
+                          {goodRoute.purchase_price_per_unit}
                         </TableCell>
                         <TableCell>
                           {goodRoute.sell_price_per_unit}
