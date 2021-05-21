@@ -10,16 +10,11 @@ import {
   Typography
 } from '@material-ui/core';
 import {
-  ShoppingBag as ShoppingBagIcon,
+  ShoppingBag as ShoppingBagIcon, Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 
 const items = [
-  // {
-  //   href: '/app/dashboard',
-  //   icon: UserIcon,
-  //   title: 'User'
-  // },
   // {
   //   href: '/app/ships',
   //   icon: BarChartIcon,
@@ -34,6 +29,11 @@ const items = [
     href: '/app/route-research',
     icon: ShoppingBagIcon,
     title: 'Route Research',
+  },
+  {
+    href: '/app/users',
+    icon: UsersIcon,
+    title: 'Users'
   },
   // {
   //   href: '/app/automation',
@@ -81,7 +81,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           color="textPrimary"
           variant="h5"
         >
-          SpaceTraders
+          SpaceMonger
         </Typography>
       </Box>
       <Divider />

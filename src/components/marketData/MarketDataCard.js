@@ -94,17 +94,6 @@ const MarketDataCard = ({ locationSymbol, locationGood, ...rest }) => {
     }
   };
 
-  console.log(marketData);
-
-  // <div>
-  //   <div>
-  //     {`${locationSymbol}  ${locationGood}`}
-  //   </div>
-  //   <div>
-  //     {marketData.map((marketDatum) => marketDatum.location_symbol)}
-  //   </div>
-  // </div>
-
   return (
     <Card {...rest}>
       <CardHeader

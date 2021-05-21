@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard';
 import MarketData from './pages/MarketData';
 import RouteResearch from './pages/RouteResearch';
 import LocationRouteResearch from './pages/LocationRouteResearch';
+import Users from './pages/Users';
+import UserStats from './pages/UserStats';
 
 const routes = [
   {
@@ -21,6 +23,8 @@ const routes = [
       { path: 'route-research', element: <RouteResearch /> },
       { path: 'route-research/:location_symbol', element: <LocationRouteResearch /> },
       { path: 'market-data/:location_symbol', element: <MarketData /> },
+      { path: 'users', element: <Users /> },
+      { path: 'users/:user_id', element: <UserStats /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
