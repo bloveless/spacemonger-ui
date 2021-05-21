@@ -1,12 +1,11 @@
 import { Helmet } from 'react-helmet';
 import {
-  Box, Button, Card, CardContent, CardHeader, colors,
+  Box, Card, CardContent, CardHeader, colors,
   Container, Divider, useTheme
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Line } from 'react-chartjs-2';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import client from '../utils/client';
 import Loading from '../components/Loading';
 
@@ -15,8 +14,6 @@ const UserStats = () => {
   const [loadingUserStats, setLoadingUserStats] = useState(true);
   const [userStats, setUserStats] = useState([]);
   const { user_id: userId } = useParams();
-
-  console.log('userStats', userStats);
 
   const reloadStats = () => {
     client.get(`/users/${userId}`)
@@ -31,7 +28,7 @@ const UserStats = () => {
   useEffect(() => {
     reloadStats();
 
-    const reloadInterval = setInterval(reloadStats, 10000);
+    const reloadInterval = setInterval(reloadStats, 100000);
 
     return () => {
       clearInterval(reloadInterval);
@@ -42,18 +39,23 @@ const UserStats = () => {
     return <Loading />;
   }
 
-  const data = {
+  const creditsData = {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
         data: userStats.stats.map((s) => s.credits),
         label: 'Credits',
       },
+    ],
+    labels: userStats.stats.map((s) => s.created_at),
+  };
+
+  const shipsData = {
+    datasets: [
       {
         backgroundColor: colors.green[500],
         data: userStats.stats.map((s) => s.ship_count),
         label: 'Ship Count',
-        fill: false,
       },
     ],
     labels: userStats.stats.map((s) => s.created_at),
@@ -122,46 +124,56 @@ const UserStats = () => {
       <Box
         sx={{
           backgroundColor: 'background.default',
-          minHeight: '100%',
           py: 3
         }}
       >
         <Container maxWidth={false}>
           <Card>
             <CardHeader
-              title={userStats.username}
+              title={`${userStats.username} Credits`}
             />
             <Divider />
             <CardContent>
               <Box
                 sx={{
                   height: 400,
-                  position: 'relative'
+                  position: 'relative',
                 }}
               >
                 <Line
-                  data={data}
+                  data={creditsData}
                   options={options}
                 />
               </Box>
             </CardContent>
+          </Card>
+        </Container>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'background.default',
+          py: 3
+        }}
+      >
+        <Container maxWidth={false}>
+          <Card>
+            <CardHeader
+              title={`${userStats.username} Ship Count`}
+            />
             <Divider />
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                p: 2
-              }}
-            >
-              <Button
-                color="primary"
-                endIcon={<ArrowRightIcon />}
-                size="small"
-                variant="text"
+            <CardContent>
+              <Box
+                sx={{
+                  height: 400,
+                  position: 'relative',
+                }}
               >
-                Overview
-              </Button>
-            </Box>
+                <Line
+                  data={shipsData}
+                  options={options}
+                />
+              </Box>
+            </CardContent>
           </Card>
         </Container>
       </Box>
