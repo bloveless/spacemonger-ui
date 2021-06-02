@@ -11,6 +11,7 @@ import RouteResearch from './pages/RouteResearch';
 import LocationRouteResearch from './pages/LocationRouteResearch';
 import Users from './pages/Users';
 import UserStats from './pages/UserStats';
+import ShipTransactions from './pages/ShipTransactions';
 
 const routes = [
   {
@@ -25,6 +26,7 @@ const routes = [
       { path: 'market-data/:location_symbol', element: <MarketData /> },
       { path: 'users', element: <Users /> },
       { path: 'users/:user_id', element: <UserStats /> },
+      { path: 'users/:user_id/ships/:ship_id/transactions', element: <ShipTransactions /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

@@ -1,3 +1,5 @@
-publish:
-	docker buildx build --platform linux/arm64 -f Dockerfile -t bloveless/spacemonger-ui:0.1.0-alpha.8 --push .
+ui_tag = 0.1.0-alpha.9
 
+publish:
+	docker build --platform linux/arm64 -f Dockerfile -t bloveless/spacemonger-ui:$(ui_tag) .
+	docker push bloveless/spacemonger-ui:$(ui_tag)

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import {
   Box, Card, CardContent, CardHeader, colors,
-  Container, Divider, useTheme
+  Container, Divider, Link, Table, TableBody, TableCell, TableHead, TableRow, useTheme
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
@@ -13,7 +13,19 @@ const UserStats = () => {
   const theme = useTheme();
   const [loadingUserStats, setLoadingUserStats] = useState(true);
   const [userStats, setUserStats] = useState([]);
+  const [loadingUserShips, setLoadingUserShips] = useState(true);
+  const [userShips, setUserShips] = useState([]);
   const { user_id: userId } = useParams();
+
+  useEffect(() => {
+    client.get(`/users/${userId}/ships`)
+      .then((response) => {
+        setUserShips(response.data);
+      })
+      .finally(() => {
+        setLoadingUserShips(false);
+      });
+  }, []);
 
   const reloadStats = () => {
     client.get(`/users/${userId}`)
@@ -35,7 +47,7 @@ const UserStats = () => {
     };
   }, []);
 
-  if (loadingUserStats) {
+  if (loadingUserStats || loadingUserShips) {
     return <Loading />;
   }
 
@@ -173,6 +185,87 @@ const UserStats = () => {
                   options={options}
                 />
               </Box>
+            </CardContent>
+          </Card>
+        </Container>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'background.default',
+          py: 3
+        }}
+      >
+        <Container maxWidth={false}>
+          <Card>
+            <CardHeader
+              title={`${userStats.username} Ships`}
+            />
+            <Divider />
+            <CardContent>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      Ship ID
+                    </TableCell>
+                    <TableCell>
+                      Ship Type
+                    </TableCell>
+                    <TableCell>
+                      Class
+                    </TableCell>
+                    <TableCell>
+                      Max Cargo
+                    </TableCell>
+                    <TableCell>
+                      Speed
+                    </TableCell>
+                    <TableCell>
+                      Manufacturer
+                    </TableCell>
+                    <TableCell>
+                      Plating
+                    </TableCell>
+                    <TableCell>
+                      Weapons
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {userShips.map((userShip) => (
+                    <TableRow hover>
+                      <TableCell>
+                        <Link
+                          href={`/app/users/${userId}/ships/${userShip.ship_id}/transactions`}
+                        >
+                          {userShip.ship_id}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        {userShip.ship_type}
+                      </TableCell>
+                      <TableCell>
+                        {userShip.class}
+                      </TableCell>
+                      <TableCell>
+                        {userShip.max_cargo}
+                      </TableCell>
+                      <TableCell>
+                        {userShip.speed}
+                      </TableCell>
+                      <TableCell>
+                        {userShip.manufacturer}
+                      </TableCell>
+                      <TableCell>
+                        {userShip.plating}
+                      </TableCell>
+                      <TableCell>
+                        {userShip.weapons}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
         </Container>
