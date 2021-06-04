@@ -6,6 +6,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Line } from 'react-chartjs-2';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import client from '../utils/client';
 import Loading from '../components/Loading';
 
@@ -202,70 +203,78 @@ const UserStats = () => {
             />
             <Divider />
             <CardContent>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      Ship ID
-                    </TableCell>
-                    <TableCell>
-                      Ship Type
-                    </TableCell>
-                    <TableCell>
-                      Class
-                    </TableCell>
-                    <TableCell>
-                      Max Cargo
-                    </TableCell>
-                    <TableCell>
-                      Speed
-                    </TableCell>
-                    <TableCell>
-                      Manufacturer
-                    </TableCell>
-                    <TableCell>
-                      Plating
-                    </TableCell>
-                    <TableCell>
-                      Weapons
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {userShips.map((userShip) => (
-                    <TableRow hover>
+              <PerfectScrollbar>
+                <Table>
+                  <TableHead>
+                    <TableRow>
                       <TableCell>
-                        <Link
-                          href={`/app/users/${userId}/ships/${userShip.ship_id}/transactions`}
-                        >
-                          {userShip.ship_id}
-                        </Link>
+                        Ship ID
                       </TableCell>
                       <TableCell>
-                        {userShip.ship_type}
+                        Ship Type
                       </TableCell>
                       <TableCell>
-                        {userShip.class}
+                        Class
                       </TableCell>
                       <TableCell>
-                        {userShip.max_cargo}
+                        Max Cargo
                       </TableCell>
                       <TableCell>
-                        {userShip.speed}
+                        Speed
                       </TableCell>
                       <TableCell>
-                        {userShip.manufacturer}
+                        Manufacturer
                       </TableCell>
                       <TableCell>
-                        {userShip.plating}
+                        Plating
                       </TableCell>
                       <TableCell>
-                        {userShip.weapons}
+                        Weapons
+                      </TableCell>
+                      <TableCell>
+                        Created At
                       </TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHead>
+                  <TableBody>
+                    {userShips.map((userShip) => (
+                      <TableRow hover>
+                        <TableCell>
+                          <Link
+                            href={`/app/users/${userId}/ships/${userShip.ship_id}/transactions`}
+                          >
+                            {userShip.ship_id}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          {userShip.ship_type}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.class}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.max_cargo}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.speed}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.manufacturer}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.plating}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.weapons}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.created_at}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </PerfectScrollbar>
             </CardContent>
           </Card>
         </Container>

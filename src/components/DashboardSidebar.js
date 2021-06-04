@@ -21,6 +21,11 @@ const items = [
   //   title: 'Ships'
   // },
   {
+    href: '/app/users',
+    icon: UsersIcon,
+    title: 'Users'
+  },
+  {
     href: '/app/systems',
     icon: ShoppingBagIcon,
     title: 'Systems',
@@ -29,11 +34,6 @@ const items = [
     href: '/app/route-research',
     icon: ShoppingBagIcon,
     title: 'Route Research',
-  },
-  {
-    href: '/app/users',
-    icon: UsersIcon,
-    title: 'Users'
   },
   // {
   //   href: '/app/automation',

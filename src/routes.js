@@ -5,7 +5,6 @@ import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
 import Register from 'src/pages/Register';
 import Systems from './pages/Systems';
-import Dashboard from './pages/Dashboard';
 import MarketData from './pages/MarketData';
 import RouteResearch from './pages/RouteResearch';
 import LocationRouteResearch from './pages/LocationRouteResearch';
@@ -18,8 +17,7 @@ const routes = [
     path: 'app',
     element: <DashboardLayout />,
     children: [
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
-      { path: 'dashboard', element: <Dashboard /> },
+      { path: '/', element: <Navigate to="/app/users" /> },
       { path: 'systems', element: <Systems /> },
       { path: 'route-research', element: <RouteResearch /> },
       { path: 'route-research/:location_symbol', element: <LocationRouteResearch /> },
@@ -37,7 +35,7 @@ const routes = [
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
+      { path: '/', element: <Navigate to="/app/users" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }
