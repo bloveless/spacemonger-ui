@@ -220,6 +220,9 @@ const UserStats = () => {
                         Max Cargo
                       </TableCell>
                       <TableCell>
+                        Loading Speed
+                      </TableCell>
+                      <TableCell>
                         Speed
                       </TableCell>
                       <TableCell>
@@ -230,6 +233,9 @@ const UserStats = () => {
                       </TableCell>
                       <TableCell>
                         Weapons
+                      </TableCell>
+                      <TableCell>
+                        Role Data
                       </TableCell>
                       <TableCell>
                         Created At
@@ -247,13 +253,16 @@ const UserStats = () => {
                           </Link>
                         </TableCell>
                         <TableCell>
-                          {userShip.ship_type}
+                          {userShip.type}
                         </TableCell>
                         <TableCell>
                           {userShip.class}
                         </TableCell>
                         <TableCell>
                           {userShip.max_cargo}
+                        </TableCell>
+                        <TableCell>
+                          {userShip.loading_speed}
                         </TableCell>
                         <TableCell>
                           {userShip.speed}
@@ -266,6 +275,9 @@ const UserStats = () => {
                         </TableCell>
                         <TableCell>
                           {userShip.weapons}
+                        </TableCell>
+                        <TableCell>
+                          {JSON.stringify(userShip.role_data)}
                         </TableCell>
                         <TableCell>
                           {userShip.created_at}
