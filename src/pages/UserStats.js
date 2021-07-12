@@ -13,12 +13,22 @@ import Loading from '../components/Loading';
 const UserStats = () => {
   const theme = useTheme();
   const [loadingUserStats, setLoadingUserStats] = useState(true);
+  const [userInfo, setUserInfo] = useState({});
+  const [loadingUserInfo, setLoadingUserInfo] = useState(true);
   const [userStats, setUserStats] = useState([]);
   const [loadingUserShips, setLoadingUserShips] = useState(true);
   const [userShips, setUserShips] = useState([]);
   const { user_id: userId } = useParams();
 
   useEffect(() => {
+    client.get(`/users/${userId}`)
+      .then((response) => [
+        setUserInfo(response.data)
+      ])
+      .finally(() => {
+        setLoadingUserInfo(false);
+      });
+
     client.get(`/users/${userId}/ships`)
       .then((response) => {
         setUserShips(response.data);
@@ -29,7 +39,7 @@ const UserStats = () => {
   }, []);
 
   const reloadStats = () => {
-    client.get(`/users/${userId}`)
+    client.get(`/users/${userId}/stats`)
       .then((response) => {
         setUserStats(response.data);
       })
@@ -48,7 +58,7 @@ const UserStats = () => {
     };
   }, []);
 
-  if (loadingUserStats || loadingUserShips) {
+  if (loadingUserInfo || loadingUserStats || loadingUserShips) {
     return <Loading />;
   }
 
@@ -56,22 +66,22 @@ const UserStats = () => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: userStats.stats.map((s) => s.credits),
+        data: userStats.map((s) => s.credits),
         label: 'Credits',
       },
     ],
-    labels: userStats.stats.map((s) => s.created_at),
+    labels: userStats.map((s) => s.created_at),
   };
 
   const shipsData = {
     datasets: [
       {
         backgroundColor: colors.green[500],
-        data: userStats.stats.map((s) => s.ship_count),
+        data: userStats.map((s) => s.ship_count),
         label: 'Ship Count',
       },
     ],
-    labels: userStats.stats.map((s) => s.created_at),
+    labels: userStats.map((s) => s.created_at),
   };
 
   const options = {
@@ -143,7 +153,7 @@ const UserStats = () => {
         <Container maxWidth={false}>
           <Card>
             <CardHeader
-              title={`${userStats.username} Credits`}
+              title={`${userInfo.username} Credits`}
             />
             <Divider />
             <CardContent>
@@ -171,7 +181,7 @@ const UserStats = () => {
         <Container maxWidth={false}>
           <Card>
             <CardHeader
-              title={`${userStats.username} Ship Count`}
+              title={`${userInfo.username} Ship Count`}
             />
             <Divider />
             <CardContent>
@@ -199,7 +209,7 @@ const UserStats = () => {
         <Container maxWidth={false}>
           <Card>
             <CardHeader
-              title={`${userStats.username} Ships`}
+              title={`${userInfo.username} Ships`}
             />
             <Divider />
             <CardContent>
