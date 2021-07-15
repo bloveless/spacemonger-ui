@@ -54,7 +54,7 @@ const ShipTransactions = () => {
                         Ship ID
                       </TableCell>
                       <TableCell>
-                        Transaction Type
+                        Type
                       </TableCell>
                       <TableCell>
                         Good
@@ -81,17 +81,17 @@ const ShipTransactions = () => {
                       <TableRow
                         hover
                         style={{
-                          backgroundColor: shipTransaction.transaction_type === 'purchase' ? 'rgb(252, 222, 222)' : 'rgb(222, 252, 224)',
+                          backgroundColor: shipTransaction.type === 'purchase' ? 'rgb(252, 222, 222)' : 'rgb(222, 252, 224)',
                         }}
                       >
                         <TableCell>
                           {shipTransaction.ship_id}
                         </TableCell>
                         <TableCell>
-                          {shipTransaction.transaction_type}
+                          {shipTransaction.type}
                         </TableCell>
                         <TableCell>
-                          {shipTransaction.good_symbol}
+                          {shipTransaction.good}
                         </TableCell>
                         <TableCell>
                           {shipTransaction.price_per_unit}
@@ -103,7 +103,7 @@ const ShipTransactions = () => {
                           {shipTransaction.total}
                         </TableCell>
                         <TableCell>
-                          {shipTransaction.location_symbol}
+                          {shipTransaction.location}
                         </TableCell>
                         <TableCell>
                           {shipTransaction.created_at}
